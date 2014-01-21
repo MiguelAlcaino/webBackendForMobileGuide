@@ -1,0 +1,433 @@
+DetalleRecorrido:
+  connection: doctrine
+  tableName: detalle_recorrido
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: detalle_recorrido_id
+    id_recorrido:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    id_sala:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    orden:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+  relations:
+    Recorrido:
+      local: id_recorrido
+      foreign: id
+      type: one
+    Sala:
+      local: id_sala
+      foreign: id
+      type: one
+Exposicion:
+  connection: doctrine
+  tableName: exposicion
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: exposicion_id
+    id_panoramica:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    codigo:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    nombre:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    descripcion:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    num_sonido:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: '0'
+      primary: false
+    num_imagenes:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: '0'
+      primary: false
+    cord_x:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cord_y:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    estado:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'true'
+      primary: false
+  relations:
+    Panoramica:
+      local: id_panoramica
+      foreign: id
+      type: one
+    ExposicionImagen:
+      local: id
+      foreign: id_exposicion
+      type: many
+    ExposicionSonido:
+      local: id
+      foreign: id_exposicion
+      type: many
+ExposicionImagen:
+  connection: doctrine
+  tableName: exposicion_imagen
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: exposicion_imagen_id
+    id_exposicion:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    ruta_imagen:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    principal:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'false'
+      primary: false
+  relations:
+    Exposicion:
+      local: id_exposicion
+      foreign: id
+      type: one
+ExposicionSonido:
+  connection: doctrine
+  tableName: exposicion_sonido
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: exposicion_sonido_id
+    id_exposicion:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    ruta_sonido:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    Exposicion:
+      local: id_exposicion
+      foreign: id
+      type: one
+GrabacionRecorrido:
+  connection: doctrine
+  tableName: grabacion_recorrido
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: grabacion_recorrido_id
+    id_sala:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    ruta_sonido:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+  relations:
+    Sala:
+      local: id_sala
+      foreign: id
+      type: one
+Panoramica:
+  connection: doctrine
+  tableName: panoramica
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: panoramica_id
+    id_sala:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    descripcion:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    ruta_imagen:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    numero_orden:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    ruta_imagen_miniatura:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    estado:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'true'
+      primary: false
+  relations:
+    Sala:
+      local: id_sala
+      foreign: id
+      type: one
+    Exposicion:
+      local: id
+      foreign: id_panoramica
+      type: many
+Piso:
+  connection: doctrine
+  tableName: piso
+  columns:
+    numero_piso:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+    ruta_imagen:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    estado:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'true'
+      primary: false
+  relations:
+    Sala:
+      local: numero_piso
+      foreign: id_piso
+      type: many
+Recorrido:
+  connection: doctrine
+  tableName: recorrido
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: recorrido_id
+    tipo:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    estado:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'true'
+      primary: false
+  relations:
+    DetalleRecorrido:
+      local: id
+      foreign: id_recorrido
+      type: many
+Sala:
+  connection: doctrine
+  tableName: sala
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: sala_id
+    nombre:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    sala_numero:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    numero_panoramicas:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: '0'
+      primary: false
+    ruta_imagen_miniatura:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    id_piso:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    cord_x:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    cord_y:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+    numero_panoramica_principal:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    estado:
+      type: boolean(1)
+      fixed: false
+      unsigned: false
+      notnull: false
+      default: 'true'
+      primary: false
+  relations:
+    Piso:
+      local: id_piso
+      foreign: numero_piso
+      type: one
+    DetalleRecorrido:
+      local: id
+      foreign: id_sala
+      type: many
+    GrabacionRecorrido:
+      local: id
+      foreign: id_sala
+      type: many
+    Panoramica:
+      local: id
+      foreign: id_sala
+      type: many
+Usuario:
+  connection: doctrine
+  tableName: usuario
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      sequence: usuario_id
+    nombre_usuario:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    email:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    password:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+    nombre_completo:
+      type: string()
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false

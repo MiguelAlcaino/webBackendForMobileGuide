@@ -1,0 +1,8 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  saludo: Mi nombre es Miguelito
+  path_subida_imagenes: C:\development\sfprojects\mantenedor_proyecto\web\uploads\imagenes
+  path_subida_sonidos: C:\development\sfprojects\mantenedor_proyecto\web\uploads\sonidos
